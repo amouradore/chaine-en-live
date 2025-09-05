@@ -37,29 +37,30 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // --- PLAYBACK LOGIC ---
-    const getYouTubeEmbedUrl = (url) => {
-        try {
-            const urlObj = new URL(url);
-            if (urlObj.hostname.includes('youtube.com') && urlObj.searchParams.has('v')) {
-                const videoId = urlObj.searchParams.get('v');
-                return `https://www.youtube.com/embed/${videoId}?autoplay=1&modestbranding=1`;
-            }
-        } catch (e) {
-            console.error("Invalid URL or URL parsing failed:", url, e);
+    const video = document.getElementById('player');
+    let hls = new Hls();
+
+    const playChannel = (url) => {
+        if (Hls.isSupported()) {
+            hls.destroy();
+            hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                video.play();
+            });
+        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+            video.src = url;
+            video.addEventListener('loadedmetadata', () => {
+                video.play();
+            });
         }
-        return null;
     };
 
     channelList.addEventListener('click', (e) => {
         if (e.target && e.target.tagName === 'LI') {
             const url = e.target.dataset.url;
-            const embedUrl = getYouTubeEmbedUrl(url);
-
-            if (embedUrl) {
-                player.innerHTML = `<iframe width="100%" height="100%" src="${embedUrl}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-            } else {
-                player.innerHTML = `<div class="player-error">Impossible de lire le format de cette URL.</div>`;
-            }
+            playChannel(url);
 
             const currentActive = channelList.querySelector('.active');
             if (currentActive) currentActive.classList.remove('active');
@@ -77,14 +78,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- INITIALIZATION ---
-    fetch('chaine.m3u')
-        .then(response => response.ok ? response.text() : Promise.reject('Failed to load playlist.'))
-        .then(data => {
-            allChannels = parseM3U(data); // Store the master list
-            displayChannels(allChannels); // Display all channels initially
-        })
-        .catch(error => {
-            console.error('Error:', error);
+    const init = async () => {
+        try {
+            const response = await fetch('chaine.m3u8');
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const m3uData = await response.text();
+            allChannels = parseM3U(m3uData);
+            displayChannels(allChannels);
+
+            // Check for channel in URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const channelUrl = urlParams.get('channel');
+            if (channelUrl) {
+                playChannel(channelUrl);
+                // Highlight the channel in the list
+                const channelItem = channelList.querySelector(`li[data-url="${channelUrl}"]`);
+                if (channelItem) {
+                    channelItem.classList.add('active');
+                }
+            }
+        } catch (error) {
+            console.error('Error loading or parsing M3U data:', error);
             if(channelList) channelList.innerHTML = '<li>Erreur de chargement des chaînes.</li>';
-        });
+        }
+    };
+
+    init();
 });
