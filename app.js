@@ -42,13 +42,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const playChannel = (url) => {
         if (Hls.isSupported()) {
-            hls.destroy();
-            hls = new Hls();
-            hls.loadSource(url);
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+            hls.destroy(); // Destroy previous instance
+            hls = new Hls(); // Create a new instance
+
+            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
+                hls.loadSource(url);
+            });
+
+            hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
                 video.play();
             });
+
+            hls.attachMedia(video); // Attach media first
         } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
             video.src = url;
             video.addEventListener('loadedmetadata', () => {
@@ -92,14 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const channelUrl = urlParams.get('channel');
             if (channelUrl) {
-                // Ensure the video player is ready before playing
-                if (video.readyState >= 2) {
-                    playChannel(channelUrl);
-                } else {
-                    video.addEventListener('canplay', () => {
-                        playChannel(channelUrl);
-                    }, { once: true });
-                }
+                // Directly call playChannel, the internal logic will handle HLS readiness
+                playChannel(channelUrl);
                 // Highlight the channel in the list
                 const channelItem = channelList.querySelector(`li[data-url="${channelUrl}"]`);
                 if (channelItem) {
