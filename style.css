@@ -4,7 +4,7 @@
     --secondary-bg-color: #1e1e1e;
     --primary-text-color: #e0e0e0;
     --accent-color: #03dac6;
-    --sidebar-width: 250px;
+    --sidebar-width: 350px;
 }
 
 body {
@@ -22,45 +22,24 @@ body {
 }
 
     #sidebar {
-        width: 60px; /* Largeur réduite */
+        width: var(--sidebar-width); /* Largeur fixe */
         background-color: var(--secondary-bg-color);
         padding: 1rem;
         box-shadow: 2px 0 5px rgba(0,0,0,0.3);
         z-index: 10;
         display: flex;
         flex-direction: column;
-        transition: width 0.3s ease;
         overflow-x: hidden; /* Cache le contenu qui dépasse horizontalement */
-    }
-
-    #sidebar:hover {
-        width: var(--sidebar-width);
-    }
-
-    /* Cache le contenu quand la sidebar est réduite et le fait réapparaître en douceur */
-    #sidebar > * {
-        opacity: 0;
-        transition: opacity 0.1s ease;
-    }
-
-    #sidebar:hover > * {
-        opacity: 1;
-        transition-delay: 0.15s; /* Le contenu apparaît après le début de l'expansion */
     }
 
     #main-content {
         flex-grow: 1;
         padding: 2rem;
-        margin-left: 60px; /* Espace pour la sidebar réduite */
-        transition: margin-left 0.3s ease;
+        margin-left: var(--sidebar-width); /* Espace pour la sidebar fixe */
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
-    }
-
-    #sidebar:hover ~ #main-content {
-        margin-left: calc(var(--sidebar-width) + 2rem); /* Pousse le contenu principal */
     }
 
 #player {
