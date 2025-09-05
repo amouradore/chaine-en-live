@@ -92,7 +92,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const channelUrl = urlParams.get('channel');
             if (channelUrl) {
-                playChannel(channelUrl);
+                // Ensure the video player is ready before playing
+                if (video.readyState >= 2) {
+                    playChannel(channelUrl);
+                } else {
+                    video.addEventListener('canplay', () => {
+                        playChannel(channelUrl);
+                    }, { once: true });
+                }
                 // Highlight the channel in the list
                 const channelItem = channelList.querySelector(`li[data-url="${channelUrl}"]`);
                 if (channelItem) {
