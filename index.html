@@ -3,28 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IPTV Player</title>
+    <title>Bienvenue sur IPTV Player</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        #welcome-container {
+            text-align: center;
+        }
+        #welcome-container h1 {
+            font-size: 3rem;
+            color: var(--accent-color);
+        }
+        .btn-launch {
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            background-color: var(--accent-color);
+            color: var(--primary-bg-color);
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .btn-launch:hover {
+            background-color: #04c3b2;
+        }
+    </style>
 </head>
 <body>
-    <div id="app-container">
-        <nav id="sidebar">
-            <div id="search-container">
-                <input type="text" id="search-input" placeholder="Rechercher une chaîne...">
-            </div>
-            <ul id="channel-list">
-                <!-- La liste des chaînes sera chargée ici par JavaScript -->
-            </ul>
-        </nav>
-        <main id="main-content">
-            <video id="player" controls autoplay></video>
-            <div class="ad-container">
-                <p>Publicité</p>
-            </div>
-        </main>
+    <div id="welcome-container">
+        <h1>IPTV Player</h1>
+        <p>Votre expérience IPTV personnalisée.</p>
+        <a href="player.html?channel=http://de.online24.pm/play/1101/BC28182177585B5/video.m3u8" class="btn-launch">Lancer le lecteur</a>
     </div>
-    
-    <script src="app.js"></script>
+    <div class="ad-container">
+        <p>Publicité</p>
+    </div>
 </body>
 </html>

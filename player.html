@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IPTV Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+</head>
+<body>
+    <div id="app-container">
+        <nav id="sidebar">
+            <div id="search-container">
+                <input type="text" id="search-input" placeholder="Rechercher une chaîne...">
+            </div>
+            <ul id="channel-list">
+                <!-- La liste des chaînes sera chargée ici par JavaScript -->
+            </ul>
+        </nav>
+        <main id="main-content">
+            <video id="player" controls autoplay></video>
+            <div class="ad-container">
+                <p>Publicité</p>
+            </div>
+        </main>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
