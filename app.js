@@ -1,11 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- DOM ELEMENTS ---
     const channelList = document.getElementById('channel-list');
-    const player = document.getElementById('player');
     const searchInput = document.getElementById('search-input');
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('main-content');
-    const appContainer = document.getElementById('app-container');
 
     // --- STATE ---
     let allChannels = [];
@@ -39,26 +35,26 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('');
     };
 
-    // --- PLAYER LOGIC (VIDEO.JS WITH ADS) ---
+    // --- PLAYER & ADS LOGIC ---
     const player = videojs('player');
 
-    const adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?' + 
-        'iu=/21775744923/external/vmap_ad_samples&sz=640x480&'
-        + 'cust_params=sample_ar%3Dpremidpostpod&ciu_szs=300x250&'
-        + 'gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&'
-        + 'correlator=';
+    const initAds = () => {
+        try {
+            const adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?' + 
+                'iu=/21775744923/external/vmap_ad_samples&sz=640x480&'
+                + 'cust_params=sample_ar%3Dpremidpostpod&ciu_szs=300x250&'
+                + 'gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&'
+                + 'correlator=';
 
-    const imaOptions = {
-        adTagUrl: adTagUrl
+            const imaOptions = { adTagUrl: adTagUrl };
+            player.ima(imaOptions);
+        } catch (e) {
+            console.error("Erreur lors de l'initialisation des publicités:", e);
+        }
     };
 
-    player.ima(imaOptions);
-
     const playChannel = (url) => {
-        player.src({
-            src: url,
-            type: 'application/x-mpegURL'
-        });
+        player.src({ src: url, type: 'application/x-mpegURL' });
         player.play();
     };
 
@@ -73,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- SEARCH LOGIC (Module 4) ---
+    // --- SEARCH LOGIC ---
     searchInput.addEventListener('input', (e) => {
         const searchTerm = e.target.value.toLowerCase();
         const filteredChannels = allChannels.filter(channel =>
@@ -93,26 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
             allChannels = parseM3U(m3uData);
             displayChannels(allChannels);
 
+            // Les publicités sont initialisées ici, APRES que les chaînes soient affichées
+            initAds();
+
             // Check for channel in URL
             const urlParams = new URLSearchParams(window.location.search);
             const channelUrl = urlParams.get('channel');
             if (channelUrl) {
-                // Directly call playChannel, the internal logic will handle HLS readiness
                 playChannel(channelUrl);
-                // Highlight the channel in the list
                 const channelItem = channelList.querySelector(`li[data-url="${channelUrl}"]`);
                 if (channelItem) {
                     channelItem.classList.add('active');
-                }
-                // Request full screen for the video player
-                if (video.requestFullscreen) {
-                    video.requestFullscreen();
-                } else if (video.mozRequestFullScreen) { /* Firefox */
-                    video.mozRequestFullScreen();
-                } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
-                    video.webkitRequestFullscreen();
-                } else if (video.msRequestFullscreen) { /* IE/Edge */
-                    video.msRequestFullscreen();
                 }
             }
         } catch (error) {
@@ -122,5 +109,4 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     init();
-
-    });
+});
