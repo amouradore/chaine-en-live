@@ -22,34 +22,26 @@ body {
 }
 
     #sidebar {
-        width: 0; /* Masqué par défaut */
+        width: var(--sidebar-width); /* Visible par défaut */
         background-color: var(--secondary-bg-color);
         padding: 1rem;
         box-shadow: 2px 0 5px rgba(0,0,0,0.3);
         z-index: 10;
         display: flex;
         flex-direction: column;
-        overflow: hidden; /* Cache le contenu qui dépasse */
+        overflow-x: hidden; /* Cache le contenu qui dépasse horizontalement */
         transition: width 0.3s ease-in-out;
-    }
-
-    #sidebar.sidebar-open {
-        width: var(--sidebar-width); /* Affiche la barre latérale */
     }
 
     #main-content {
         flex-grow: 1;
         padding: 2rem;
-        margin-left: 0; /* Masqué par défaut */
+        margin-left: var(--sidebar-width); /* Espace pour la sidebar fixe */
         display: flex;
         justify-content: center;
         align-items: center;
         flex-direction: column;
         transition: margin-left 0.3s ease-in-out;
-    }
-
-    #main-content.main-content-shifted {
-        margin-left: var(--sidebar-width); /* Déplace le contenu principal */
     }
 
 #player {
@@ -142,12 +134,14 @@ body {
     }
 
     #sidebar {
+        width: 100%; /* Ensure sidebar takes full width */
         height: auto; /* Allow height to adjust to content */
         box-shadow: none; /* Remove shadow for stacked layout */
         padding: 1rem; /* Keep padding */
     }
 
     #main-content {
+        margin-left: 0; /* Remove left margin on mobile */
         padding: 1rem; /* Adjust padding for mobile */
     }
 

@@ -126,35 +126,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 
-    // --- SIDEBAR TOGGLE LOGIC ---
-    let sidebarTimeout;
-    const hideSidebar = () => {
-        sidebar.classList.remove('sidebar-open');
-        mainContent.classList.remove('main-content-shifted');
-    };
-
-    const showSidebar = () => {
-        clearTimeout(sidebarTimeout);
-        sidebar.classList.add('sidebar-open');
-        mainContent.classList.add('main-content-shifted');
-    };
-
-    // For PC (mouse movement)
-    appContainer.addEventListener('mousemove', (e) => {
-        if (e.clientX < 50) { // If mouse is near the left edge
-            showSidebar();
-        } else {
-            sidebarTimeout = setTimeout(hideSidebar, 1000); // Hide after 1 second
-        }
     });
-
-    // For mobile (touch) - simple toggle on tap
-    // This might need refinement for better UX on mobile
-    appContainer.addEventListener('touchstart', (e) => {
-        if (sidebar.classList.contains('sidebar-open')) {
-            hideSidebar();
-        } else {
-            showSidebar();
-        }
-    });
-});
