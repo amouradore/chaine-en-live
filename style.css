@@ -120,3 +120,42 @@ body {
     color: #888;
     font-style: italic;
 }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 100%; /* Sidebar takes full width on small screens */
+    }
+
+    #app-container {
+        flex-direction: column; /* Stack sidebar and main content vertically */
+    }
+
+    #sidebar {
+        width: 100%; /* Ensure sidebar takes full width */
+        height: auto; /* Allow height to adjust to content */
+        box-shadow: none; /* Remove shadow for stacked layout */
+        padding: 1rem; /* Keep padding */
+    }
+
+    #main-content {
+        margin-left: 0; /* Remove left margin on mobile */
+        padding: 1rem; /* Adjust padding for mobile */
+    }
+
+    #player {
+        height: auto; /* Allow video player height to adjust */
+    }
+
+    /* Adjust ad container for mobile if needed */
+    .ad-container {
+        width: 100%; /* Ads take full width */
+        height: auto; /* Allow height to adjust */
+        margin-top: 10px; /* Adjust margin */
+    }
+
+    .ad-container iframe {
+        width: 100% !important; /* Ensure iframe takes full width of its container */
+        margin: auto !important; /* Center iframe */
+    }
+}
