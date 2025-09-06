@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
     <title>IPTV Player</title>
+    <!-- Video.js CSS -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <!-- Video.js IMA CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/2.1.0/videojs.ima.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 </head>
 <body>
     <div id="app-container">
@@ -30,7 +33,8 @@
         </nav>
         <main id="main-content">
             <div id="video-wrapper">
-                <video id="player" controls autoplay muted></video>
+                <!-- Balise vidéo mise à jour pour Video.js -->
+                <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted preload="auto"></video>
             </div>
             <aside id="ad-column">
                 <!-- Publicité Verticale -->
@@ -41,6 +45,11 @@
         </main>
     </div>
     
+    <!-- Video.js & Ad Plugin Scripts -->
+    <script src="https://vjs.zencdn.net/8.10.0/video.js"></script>
+    <script src="//imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/7.2.1/videojs.ads.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/2.1.0/videojs.ima.min.js"></script>
     <script src="app.js"></script>
     
     <!-- Ad block at the bottom of the page -->

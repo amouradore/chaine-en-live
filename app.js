@@ -39,30 +39,27 @@ document.addEventListener('DOMContentLoaded', () => {
         ).join('');
     };
 
-    // --- PLAYBACK LOGIC ---
-    const video = document.getElementById('player');
-    let hls = new Hls();
+    // --- PLAYER LOGIC (VIDEO.JS WITH ADS) ---
+    const player = videojs('player');
+
+    const adTagUrl = 'https://pubads.g.doubleclick.net/gampad/ads?' + 
+        'iu=/21775744923/external/vmap_ad_samples&sz=640x480&'
+        + 'cust_params=sample_ar%3Dpremidpostpod&ciu_szs=300x250&'
+        + 'gdfp_req=1&env=vp&output=vmap&unviewed_position_start=1&'
+        + 'correlator=';
+
+    const imaOptions = {
+        adTagUrl: adTagUrl
+    };
+
+    player.ima(imaOptions);
 
     const playChannel = (url) => {
-        if (Hls.isSupported()) {
-            hls.destroy(); // Destroy previous instance
-            hls = new Hls(); // Create a new instance
-
-            hls.on(Hls.Events.MEDIA_ATTACHED, () => {
-                hls.loadSource(url);
-            });
-
-            hls.on(Hls.Events.MANIFEST_PARSED, (event, data) => {
-                video.play();
-            });
-
-            hls.attachMedia(video); // Attach media first
-        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-            video.src = url;
-            video.addEventListener('loadedmetadata', () => {
-                video.play();
-            });
-        }
+        player.src({
+            src: url,
+            type: 'application/x-mpegURL'
+        });
+        player.play();
     };
 
     channelList.addEventListener('click', (e) => {
