@@ -3,6 +3,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const channelList = document.getElementById('channel-list');
     const player = document.getElementById('player');
     const searchInput = document.getElementById('search-input');
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('main-content');
+    const appContainer = document.getElementById('app-container');
 
     // --- STATE ---
     let allChannels = [];
@@ -104,6 +107,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (channelItem) {
                     channelItem.classList.add('active');
                 }
+                // Request full screen for the video player
+                if (video.requestFullscreen) {
+                    video.requestFullscreen();
+                } else if (video.mozRequestFullScreen) { /* Firefox */
+                    video.mozRequestFullScreen();
+                } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+                    video.webkitRequestFullscreen();
+                } else if (video.msRequestFullscreen) { /* IE/Edge */
+                    video.msRequestFullscreen();
+                }
             }
         } catch (error) {
             console.error('Error loading or parsing M3U data:', error);
@@ -112,4 +125,36 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     init();
+
+    // --- SIDEBAR TOGGLE LOGIC ---
+    let sidebarTimeout;
+    const hideSidebar = () => {
+        sidebar.classList.remove('sidebar-open');
+        mainContent.classList.remove('main-content-shifted');
+    };
+
+    const showSidebar = () => {
+        clearTimeout(sidebarTimeout);
+        sidebar.classList.add('sidebar-open');
+        mainContent.classList.add('main-content-shifted');
+    };
+
+    // For PC (mouse movement)
+    appContainer.addEventListener('mousemove', (e) => {
+        if (e.clientX < 50) { // If mouse is near the left edge
+            showSidebar();
+        } else {
+            sidebarTimeout = setTimeout(hideSidebar, 1000); // Hide after 1 second
+        }
+    });
+
+    // For mobile (touch) - simple toggle on tap
+    // This might need refinement for better UX on mobile
+    appContainer.addEventListener('touchstart', (e) => {
+        if (sidebar.classList.contains('sidebar-open')) {
+            hideSidebar();
+        } else {
+            showSidebar();
+        }
+    });
 });
