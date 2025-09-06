@@ -5,6 +5,7 @@
     --primary-text-color: #e0e0e0;
     --accent-color: #03dac6;
     --sidebar-width: 350px;
+    --ad-column-width: 300px; /* Largeur de la colonne de pub */
 }
 
 body {
@@ -21,28 +22,31 @@ body {
     height: 100vh;
 }
 
-    #sidebar {
-        width: var(--sidebar-width); /* Visible par défaut */
-        background-color: var(--secondary-bg-color);
-        padding: 1rem;
-        box-shadow: 2px 0 5px rgba(0,0,0,0.3);
-        z-index: 10;
-        display: flex;
-        flex-direction: column;
-        overflow-x: hidden; /* Cache le contenu qui dépasse horizontalement */
-        transition: width 0.3s ease-in-out;
-    }
+#sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--secondary-bg-color);
+    padding: 1rem;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.3);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    transition: width 0.3s ease-in-out;
+}
 
-    #main-content {
-        flex-grow: 1;
-        padding: 2rem;
-        margin-left: var(--sidebar-width); /* Espace pour la sidebar fixe */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        transition: margin-left 0.3s ease-in-out;
-    }
+#main-content {
+    flex-grow: 1;
+    display: flex; /* Changement pour une disposition flex */
+    padding: 1rem; /* Réduction du padding */
+    gap: 1rem; /* Espace entre le lecteur et la pub */
+    /* La marge à gauche est supprimée car la sidebar est fixe */
+}
+
+#video-wrapper {
+    flex-grow: 1; /* Le lecteur prend l'espace restant */
+    display: flex;
+    height: calc(100vh - 2rem); /* Hauteur complète moins le padding */
+}
 
 #player {
     width: 100%;
@@ -59,9 +63,29 @@ body {
     content: "Sélectionnez une chaîne pour commencer";
 }
 
+/* --- Colonne de Publicité --- */
+#ad-column {
+    width: var(--ad-column-width);
+    min-width: var(--ad-column-width); /* Empêche la colonne de rétrécir */
+    height: calc(100vh - 2rem); /* Hauteur complète moins le padding */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ad-container-vertical {
+    width: 100%;
+    height: 100%;
+    background-color: #1e1e1e;
+    border: 1px solid #444;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* --- Barre latérale --- */
 #search-container {
-    height: 40px; /* Espace réservé pour la recherche */
+    height: 40px;
     margin-bottom: 1rem;
 }
 
@@ -69,11 +93,10 @@ body {
     list-style: none;
     padding: 0;
     margin: 0;
-    overflow-y: auto; /* Ajoute le défilement si la liste est longue */
+    overflow-y: auto;
     flex-grow: 1;
 }
 
-/* --- Style des éléments de la liste de chaînes --- */
 #channel-list li {
     padding: 12px 10px;
     border-bottom: 1px solid #333;
@@ -95,7 +118,6 @@ body {
     color: #ff8a80;
 }
 
-/* --- Style de la barre de recherche --- */
 #search-input {
     width: 100%;
     padding: 8px;
@@ -103,61 +125,78 @@ body {
     border: 1px solid #444;
     border-radius: 4px;
     color: var(--primary-text-color);
-    box-sizing: border-box; /* Assure que le padding ne change pas la largeur */
+    box-sizing: border-box;
 }
 
-/* --- Ad Container --- */
-.ad-container {
-    width: 728px;
-    height: 90px;
-    background-color: #333;
-    border: 1px solid #444;
-    display: flex;
-    justify-content: center;
+/* --- Bouton de Don --- */
+#donation-container {
+    padding: 1rem 0;
+    text-align: center;
+}
+
+.donation-button {
+    display: inline-flex;
     align-items: center;
-    margin-top: 20px;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: #FFDD00; /* Couleur officielle de Buy Me a Coffee */
+    color: #000000;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
 }
 
-.ad-container p {
-    color: #888;
-    font-style: italic;
+.donation-button:hover {
+    background-color: #f0c400;
+}
+
+.donation-button img {
+    width: 24px;
+    margin-right: 10px;
 }
 
 /* Responsive adjustments */
+@media (max-width: 1200px) { /* Point de rupture pour cacher la pub */
+    #ad-column {
+        display: none;
+    }
+}
+
 @media (max-width: 768px) {
     :root {
-        --sidebar-width: 100%; /* Sidebar takes full width on small screens */
+        --sidebar-width: 100%;
     }
 
     #app-container {
-        flex-direction: column; /* Stack sidebar and main content vertically */
+        flex-direction: column;
     }
 
     #sidebar {
-        width: 100%; /* Ensure sidebar takes full width */
-        height: auto; /* Allow height to adjust to content */
-        box-shadow: none; /* Remove shadow for stacked layout */
-        padding: 1rem; /* Keep padding */
+        width: 100%;
+        height: 50vh; /* Moitié de l'écran pour la liste */
+        box-shadow: none;
     }
 
     #main-content {
-        margin-left: 0; /* Remove left margin on mobile */
-        padding: 1rem; /* Adjust padding for mobile */
+        flex-direction: column; /* Lecteur au-dessus de la pub sur mobile */
+        height: auto;
+        padding: 1rem 0;
+    }
+    
+    #video-wrapper {
+        height: 50vh; /* L'autre moitié */
+        width: 100%;
     }
 
-    #player {
-        height: auto; /* Allow video player height to adjust */
+    #ad-column {
+        display: block; /* Ré-afficher la colonne de pub */
+        width: 100%;
+        height: auto; /* Hauteur auto */
+        margin-top: 1rem;
     }
 
-    /* Adjust ad container for mobile if needed */
-    .ad-container {
-        width: 100%; /* Ads take full width */
-        height: auto; /* Allow height to adjust */
-        margin-top: 10px; /* Adjust margin */
-    }
-
-    .ad-container iframe {
-        width: 100% !important; /* Ensure iframe takes full width of its container */
-        margin: auto !important; /* Center iframe */
+    .ad-container-vertical {
+        min-height: 90px; /* Hauteur minimale pour la pub mobile */
     }
 }
