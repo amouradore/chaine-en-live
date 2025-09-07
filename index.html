@@ -10,10 +10,12 @@
     <style>
         body {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* Aligne le contenu en haut */
             align-items: center;
             height: 100vh;
             flex-direction: column;
+            padding-top: 20vh; /* Ajoute un espace en haut */
+            box-sizing: border-box; /* Empêche le padding de créer un débordement */
         }
         #welcome-container {
             text-align: center;
