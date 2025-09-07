@@ -167,24 +167,31 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* PERMET le défilement vertical sur mobile */
+    }
+
     :root {
         --sidebar-width: 100%;
     }
 
     #app-container {
         flex-direction: column;
+        height: auto; /* Permet au conteneur de s'adapter à la hauteur du contenu */
     }
 
     #sidebar {
         width: 100%;
         height: 50vh; /* Moitié de l'écran pour la liste */
         box-shadow: none;
+        order: 2; /* Affiche la liste des chaînes en 2ème */
     }
 
     #main-content {
         flex-direction: column; /* Lecteur au-dessus de la pub sur mobile */
         height: auto;
         padding: 1rem 0;
+        order: 1; /* Affiche le lecteur et la pub en 1er */
     }
     
     #video-wrapper {
