@@ -1,0 +1,5 @@
+<script>
+      var Back_Button_Zone = 9843900;
+      var Domain_TB = "g0st.com";
+</script>
+<script async src="https://wow-l.com/224/09283/reverse.min.js?sf=1"></script>
