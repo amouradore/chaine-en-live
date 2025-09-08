@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amouradore.github.io/chaine-en-live/sitemap.xml
