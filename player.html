@@ -25,6 +25,26 @@
     <!-- Video.js IMA CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/2.1.0/videojs.ima.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Style pour les boutons de partage */
+        #share-container {
+            text-align: center;
+            padding: 10px 0;
+        }
+        .share-button {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-family: sans-serif;
+        }
+        .share-button.twitter { background-color: #1DA1F2; }
+        .share-button.facebook { background-color: #1877F2; }
+        .share-button.whatsapp { background-color: #25D366; }
+    </style>
 </head>
 <body>
     <div id="app-container">
@@ -51,6 +71,13 @@
                 <!-- Balise vidéo mise à jour pour Video.js -->
                 <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted preload="auto"></video>
             </div>
+
+            <!-- Section de Partage Social -->
+            <div id="share-container">
+                <a href="#" id="share-twitter" class="share-button twitter" target="_blank">Partager sur Twitter</a>
+                <a href="#" id="share-facebook" class="share-button facebook" target="_blank">Partager sur Facebook</a>
+                <a href="#" id="share-whatsapp" class="share-button whatsapp" target="_blank">Partager sur WhatsApp</a>
+            </div>
             <aside id="ad-column">
                 <!-- Publicité Verticale -->
                 <div class="ad-container-vertical">
@@ -66,6 +93,46 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/7.2.1/videojs.ads.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/2.1.0/videojs.ima.min.js"></script>
     <script src="app.js"></script>
+
+    <script>
+    // --- LOGIQUE DE PARTAGE SOCIAL ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const twitterBtn = document.getElementById('share-twitter');
+        const facebookBtn = document.getElementById('share-facebook');
+        const whatsappBtn = document.getElementById('share-whatsapp');
+
+        function updateShareLinks(channelUrl, channelName) {
+            const text = `Regardez ${channelName} en direct !`;
+            const pageUrl = `https://amouradore.github.io/chaine-en-live/player.html?channel=${encodeURIComponent(channelUrl)}`;
+
+            twitterBtn.href = `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(text)}`;
+            facebookBtn.href = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+            whatsappBtn.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(text + ' ' + pageUrl)}`;
+        }
+
+        // Met à jour les liens quand une chaîne est cliquée
+        const channelList = document.getElementById('channel-list');
+        channelList.addEventListener('click', (e) => {
+            if (e.target && e.target.tagName === 'LI') {
+                const url = e.target.dataset.url;
+                const name = e.target.textContent;
+                updateShareLinks(url, name);
+            }
+        });
+
+        // Met à jour au chargement si une chaîne est dans l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const initialChannelUrl = urlParams.get('channel');
+        if (initialChannelUrl) {
+            // On attend que la liste des chaînes soit chargée pour trouver le nom
+            setTimeout(() => {
+                const channelItem = channelList.querySelector(`li[data-url="${initialChannelUrl}"]`);
+                const initialChannelName = channelItem ? channelItem.textContent : 'cette chaîne';
+                updateShareLinks(initialChannelUrl, initialChannelName);
+            }, 1500); // Petit délai pour laisser le temps à app.js de charger les chaînes
+        }
+    });
+    </script>
     
     <!-- Ad block at the bottom of the page -->
     <div class="ad-container">
