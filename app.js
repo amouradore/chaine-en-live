@@ -81,22 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INITIALIZATION ---
     const init = async () => {
         try {
-            // CHAÎNE DE TEST AJOUTÉE DIRECTEMENT ICI
-            const testChannel = { 
-                name: "CHAÎNE TEST SPORT", 
-                url: "http://13.team.ga:80/ch1128/mono.m3u8?token=refael.Ca7RM_9T5ydDxKepugjJ82sAw6-6PYHVcxGFO_CtUB1eFgphRMJec1wf8m0oIEbs"
-            };
-
             const response = await fetch('chaine.m3u8');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const m3uData = await response.text();
             allChannels = parseM3U(m3uData);
-            
-            // Ajout de la chaîne de test au début de la liste
-            allChannels.unshift(testChannel);
-
             displayChannels(allChannels);
 
             // Les publicités sont initialisées ici, APRES que les chaînes soient affichées
