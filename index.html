@@ -67,6 +67,31 @@
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             background-image: linear-gradient(45deg, #ff8c00 0%, #ff4500 100%);
         }
+
+        /* --- Bouton de Don --- */
+        #donation-container {
+            padding: 1rem 0;
+            text-align: center;
+        }
+        .donation-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px 20px;
+            border-radius: 8px;
+            background-color: #FFDD00; /* Couleur officielle de Buy Me a Coffee */
+            color: #000000;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .donation-button:hover {
+            background-color: #f0c400;
+        }
+        .donation-button img {
+            width: 24px;
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body>
@@ -82,6 +107,14 @@
             <div id="intro-text" style="max-width: 800px; margin: 20px auto; padding: 0 15px;">
                 <p>Ne manquez plus aucun <strong>match en direct</strong> ! Notre lecteur <strong>IPTV</strong> vous donne un accès gratuit et instantané à toutes les rencontres de football (<strong>koora</strong>, <strong>كرة</strong>) et à vos compétitions sportives préférées. Le <strong>streaming</strong> de sport n'a jamais été aussi simple.</p>
                 <p>Explorez un vaste catalogue de <strong>chaînes TV gratuites</strong> du monde entier. Que vous cherchiez des informations, du divertissement ou des programmes pour enfants, nos <strong>chaines en ligne</strong> (<strong>قنوات</strong>) sont disponibles en un seul clic. Notre service est 100% gratuit et ne nécessite aucune inscription.</p>
+            </div>
+
+            <!-- Module 2: Bouton de Don -->
+            <div id="donation-container">
+              <a href="https://buymeacoffee.com/moradoro" target="_blank" class="donation-button">
+                <img src="https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-3.svg" alt="Buy Me A Coffee">
+                <span>Soutenir ce projet</span>
+              </a>
             </div>
 
             <div id="categories-section" style="max-width: 800px; margin: 20px auto; padding: 0 15px; text-align: left;">
