@@ -24,6 +24,7 @@
     <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <!-- Video.js IMA CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/videojs-ima/2.1.0/videojs.ima.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
         /* Style pour les boutons de partage */
@@ -34,12 +35,14 @@
         .share-button {
             display: inline-block;
             margin: 5px;
-            padding: 10px 15px;
-            border-radius: 5px;
+            padding: 10px;
+            border-radius: 50%;
             color: white;
             text-decoration: none;
-            font-weight: bold;
-            font-family: sans-serif;
+            font-size: 20px;
+            width: 40px;
+            height: 40px;
+            text-align: center;
         }
         .share-button.twitter { background-color: #1DA1F2; }
         .share-button.facebook { background-color: #1877F2; }
@@ -74,9 +77,9 @@
 
             <!-- Section de Partage Social -->
             <div id="share-container">
-                <a href="#" id="share-twitter" class="share-button twitter" target="_blank">Partager sur Twitter</a>
-                <a href="#" id="share-facebook" class="share-button facebook" target="_blank">Partager sur Facebook</a>
-                <a href="#" id="share-whatsapp" class="share-button whatsapp" target="_blank">Partager sur WhatsApp</a>
+                <a href="#" id="share-twitter" class="share-button twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" id="share-facebook" class="share-button facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                <a href="#" id="share-whatsapp" class="share-button whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
             </div>
             <aside id="ad-column">
                 <!-- Publicité Verticale -->
