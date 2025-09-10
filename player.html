@@ -48,10 +48,6 @@
         .share-button.twitter { background-color: #1DA1F2; }
         .share-button.facebook { background-color: #1877F2; }
         .share-button.whatsapp { background-color: #25D366; }
-
-        #video-wrapper {
-            flex-direction: column;
-        }
     </style>
 </head>
 <body>
@@ -75,23 +71,30 @@
             </ul>
         </nav>
         <main id="main-content">
-            <div id="video-wrapper">
-                <!-- Balise vidéo mise à jour pour Video.js -->
-                <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted preload="auto"></video>
-                <!-- Ad block below player -->
-                <div id="ad-below-player" style="text-align: center; margin-top: 15px;">
-                    <iframe data-aa='2409226' src='//acceptable.a-ads.com/2409226/?size=728x90' style='border:0; padding:0; width:728px; height:90px; overflow:hidden;'></iframe>
+            <!-- Colonne de gauche pour le lecteur et les éléments associés -->
+            <div id="left-column" style="flex-grow: 1; display: flex; flex-direction: column;">
+                
+                <!-- Lecteur Vidéo -->
+                <div id="video-wrapper">
+                    <video id="player" class="video-js vjs-default-skin vjs-big-play-centered" controls autoplay muted preload="auto"></video>
                 </div>
+
+                <!-- Publicité sous le lecteur -->
+                <div id="ad-below-player" style="text-align: center; margin: 10px 0;">
+                    <iframe data-aa='2409226' src='//acceptable.a-ads.com/2409226/?size=728x90' style='border:0; padding:0; width:728px; height:90px; overflow:hidden; max-width: 100%;'></iframe>
+                </div>
+
+                <!-- Boutons de Partage -->
+                <div id="share-container">
+                    <a href="#" id="share-twitter" class="share-button twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" id="share-facebook" class="share-button facebook" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="#" id="share-whatsapp" class="share-button whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                </div>
+
             </div>
 
-            <!-- Section de Partage Social -->
-            <div id="share-container">
-                <a href="#" id="share-twitter" class="share-button twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                <a href="#" id="share-facebook" class="share-button facebook" target="_blank"><i class="fab fa-facebook"></i></a>
-                <a href="#" id="share-whatsapp" class="share-button whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
-            </div>
+            <!-- Colonne de droite pour la publicité verticale -->
             <aside id="ad-column">
-                <!-- Publicité Verticale -->
                 <div class="ad-container-vertical">
                     <iframe data-aa='2409226' src='//acceptable.a-ads.com/2409226/?size=Adaptive' style='border:0; padding:0; width:100%; height:100%; overflow:hidden;'></iframe>
                 </div>
