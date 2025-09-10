@@ -58,8 +58,6 @@
             text-decoration: none;
             transition: all 0.3s ease-in-out;
             line-height: 1.5;
-            margin-bottom: 20px;
-            display: inline-block;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
         .btn-launch:hover {
@@ -92,6 +90,27 @@
             width: 24px;
             margin-right: 10px;
         }
+
+        /* --- Bouton Premium --- */
+        .btn-premium {
+            padding: 20px 30px;
+            font-size: 1.2rem; /* Un peu plus petit */
+            background-color: transparent;
+            color: #FFDD00; /* Couleur Or */
+            border: 2px solid #FFDD00;
+            border-radius: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            line-height: 1.5;
+            margin-left: 15px; /* Espace entre les boutons */
+        }
+        .btn-premium:hover {
+            background-color: #FFDD00;
+            color: #121212;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 221, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -102,7 +121,10 @@
         </aside>
 
         <main id="center-content">
-            <a href="player.html?channel=https://de.online24.pm/play/803/BC28182177585B5/video.m3u8" class="btn-launch">مشاهدة كل القنوات<br>Watch all channels<br>regarder toutes les chaines</a>
+            <div id="button-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
+                <a href="player.html?channel=https://de.online24.pm/play/803/BC28182177585B5/video.m3u8" class="btn-launch">مشاهدة كل القنوات<br>Watch all channels<br>regarder toutes les chaines</a>
+                <a href="#" class="btn-premium">Qualité Premium<br>(Stable)</a>
+            </div>
             <h1>IPTV Player</h1>
             <div id="intro-text" style="max-width: 800px; margin: 20px auto; padding: 0 15px;">
                 <p>Ne manquez plus aucun <strong>match en direct</strong> ! Notre lecteur <strong>IPTV</strong> vous donne un accès gratuit et instantané à toutes les rencontres de football (<strong>koora</strong>, <strong>كرة</strong>) et à vos compétitions sportives préférées. Le <strong>streaming</strong> de sport n'a jamais été aussi simple.</p>
