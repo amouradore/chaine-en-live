@@ -22,6 +22,7 @@
     <meta property="twitter:description" content="Regardez les matchs de football (koora, كرة) et des centaines de chaînes TV en direct et gratuitement. Le meilleur lecteur IPTV pour le streaming en ligne.">
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-EVVTL6BZC7"></script>
     <script>
@@ -32,48 +33,47 @@
     </script>
 </head>
 <body>
-    <div id="main-layout">
-        <aside id="left-ad-col" class="ad-column">
-            <!-- Publicité de gauche -->
-            <iframe data-aa='2409226' src='//acceptable.a-ads.com/2409226/?size=Adaptive' style='border:0; padding:0; width:100%; height:100%; overflow:hidden;'></iframe>
-        </aside>
-
-        <main id="center-content">
-            <div id="button-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 20px;">
-                <a href="player.html?channel=https://de.online24.pm/play/803/BC28182177585B5/video.m3u8" class="btn-launch">مشاهدة كل القنوات<br>Watch all channels<br>regarder toutes les chaines</a>
-                <a href="https://satline.tv/order/aff.php?aff=3" class="btn-premium">Qualité Premium<br>(Stable)</a>
-            </div>
+    <div class="container">
+        <header class="header">
             <h1>IPTV Player</h1>
-            <div id="intro-text" style="max-width: 800px; margin: 20px auto; padding: 0 15px;">
-                <p>Ne manquez plus aucun <strong>match en direct</strong> ! Notre lecteur <strong>IPTV</strong> vous donne un accès gratuit et instantané à toutes les rencontres de football (<strong>koora</strong>, <strong>كرة</strong>) et à vos compétitions sportives préférées. Le <strong>streaming</strong> de sport n'a jamais été aussi simple.</p>
-                <p>Explorez un vaste catalogue de <strong>chaînes TV gratuites</strong> du monde entier. Que vous cherchiez des informations, du divertissement ou des programmes pour enfants, nos <strong>chaines en ligne</strong> (<strong>قنوات</strong>) sont disponibles en un seul clic. Notre service est 100% gratuit et ne nécessite aucune inscription.</p>
-            </div>
+            <p class="subtitle">Regardez la TV en direct et les matchs de football gratuitement</p>
+        </header>
 
-            <!-- Module 2: Bouton de Don -->
-            <div id="donation-container">
-              <a href="https://buymeacoffee.com/moradoro" target="_blank" class="donation-button">
-                <img src="https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-3.svg" alt="Buy Me A Coffee">
-                <span>Soutenir ce projet</span>
-              </a>
-            </div>
+        <div class="cta-container">
+            <a href="player.html" class="btn-launch">Lancer le lecteur et voir les chaînes</a>
+        </div>
 
-            <div id="categories-section" style="max-width: 800px; margin: 20px auto; padding: 0 15px; text-align: left;">
-                <h3>Catégories de chaînes populaires</h3>
-                <ul style="list-style-position: inside;">
-                    <li><strong>Chaînes de Sport :</strong> Ne ratez plus un match de votre équipe favorite.</li>
-                    <li><strong>Chaînes d'Information :</strong> Restez informé avec les actualités en continu.</li>
-                    <li><strong>Chaînes de Films & Séries :</strong> Détendez-vous avec un large choix de divertissement.</li>
-                    <li><strong>Chaînes Internationales :</strong> Explorez des contenus du monde entier.</li>
-                </ul>
+        <section class="features">
+            <div class="feature-card">
+                <i class="fas fa-futbol"></i>
+                <h3>Matchs en Direct</h3>
+                <p>Ne manquez aucun match de vos équipes préférées. Accès instantané au streaming de football.</p>
             </div>
-        </main>
+            <div class="feature-card">
+                <i class="fas fa-tv"></i>
+                <h3>Chaînes TV Gratuites</h3>
+                <p>Un large catalogue de chaînes du monde entier : information, divertissement, et plus encore.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Multi-plateforme</h3>
+                <p>Regardez sur votre ordinateur, tablette ou smartphone. Compatible avec tous les appareils.</p>
+            </div>
+        </section>
 
-        <aside id="right-ad-col" class="ad-column">
-            <!-- Publicité de droite -->
-            <iframe data-aa='2409226' src='//acceptable.a-ads.com/2409226/?size=Adaptive' style='border:0; padding:0; width:100%; height:100%; overflow:hidden;'></iframe>
-        </aside>
+        <div class="premium-cta">
+            <a href="https://satline.tv/order/aff.php?aff=3" class="btn-premium">Passez à la Qualité Premium (Stable)</a>
+        </div>
+
+        <div id="donation-container">
+          <a href="https://buymeacoffee.com/moradoro" target="_blank" class="donation-button">
+            <img src="https://www.buymeacoffee.com/assets/img/guidelines/logo-mark-3.svg" alt="Buy Me A Coffee">
+            <span>Soutenir ce projet</span>
+          </a>
+        </div>
     </div>
-    <footer style="text-align: center; padding: 20px; margin-top: 40px; color: #888;">
+
+    <footer style="text-align: center; padding: 20px; color: #888;">
         <a href="privacy.html" style="color: #888; text-decoration: none;">Politique de Confidentialité</a>
     </footer>
 </body>
