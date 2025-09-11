@@ -92,9 +92,17 @@ document.addEventListener('DOMContentLoaded', () => {
             // Les publicités sont initialisées ici, APRES que les chaînes soient affichées
             initAds();
 
-            // Check for channel in URL
+            // Check for channel in URL or play default
             const urlParams = new URLSearchParams(window.location.search);
-            const channelUrl = urlParams.get('channel');
+            let channelUrl = urlParams.get('channel');
+
+            if (!channelUrl) {
+                const defaultChannel = allChannels.find(c => c.name.trim() === 'DAZN 1 DE');
+                if (defaultChannel) {
+                    channelUrl = defaultChannel.url;
+                }
+            }
+
             if (channelUrl) {
                 playChannel(channelUrl);
                 const channelItem = channelList.querySelector(`li[data-url="${channelUrl}"]`);
@@ -102,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     channelItem.classList.add('active');
                 }
             }
+
         } catch (error) {
             console.error('Error loading or parsing M3U data:', error);
             if(channelList) channelList.innerHTML = '<li>Erreur de chargement des chaînes.</li>';

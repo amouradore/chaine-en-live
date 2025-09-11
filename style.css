@@ -211,91 +211,83 @@ body {
     }
 }
 
-/* --- Homepage Styles --- */
-.container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 40px 20px;
+/* --- Homepage Improvements --- */
+
+#center-content {
     text-align: center;
+    padding: 2rem;
 }
 
-.header h1 {
-    font-size: 3rem;
-    margin-bottom: 10px;
-    color: var(--accent-color);
+#button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 2rem;
 }
 
-.subtitle {
-    font-size: 1.2rem;
-    color: var(--primary-text-color);
-    margin-bottom: 40px;
-}
-
-.cta-container {
-    margin-bottom: 40px;
+.btn-launch, .btn-premium {
+    padding: 15px 30px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: transform 0.2s ease;
+    border: none;
+    cursor: pointer;
 }
 
 .btn-launch {
     background-color: var(--accent-color);
     color: var(--primary-bg-color);
-    padding: 15px 30px;
     font-size: 1.2rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-}
-
-.btn-launch:hover {
-    background-color: #04cba9;
-}
-
-.features {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px;
-    margin-bottom: 40px;
-}
-
-.feature-card {
-    background-color: var(--secondary-bg-color);
-    padding: 30px;
-    border-radius: 8px;
-    width: 30%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.feature-card i {
-    font-size: 3rem;
-    color: var(--accent-color);
-    margin-bottom: 20px;
-}
-
-.feature-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.premium-cta {
-    margin-bottom: 20px;
 }
 
 .btn-premium {
     background-color: #ffc107;
     color: #000;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
 }
 
-@media (max-width: 768px) {
-    .features {
-        flex-direction: column;
-    }
+.btn-launch:hover, .btn-premium:hover {
+    transform: scale(1.05);
+}
 
-    .feature-card {
-        width: 100%;
-        margin-bottom: 20px;
-    }
+#intro-text {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+#categories-section {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 15px;
+    text-align: left;
+}
+
+#categories-section h3 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+}
+
+#categories-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+#categories-section li {
+    background-color: var(--secondary-bg-color);
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+}
+
+#categories-section li i {
+    font-size: 1.5rem;
+    color: var(--accent-color);
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
 }
