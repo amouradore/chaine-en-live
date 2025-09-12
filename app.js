@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
             let channelUrl = urlParams.get('channel');
 
             if (!channelUrl) {
-                const defaultChannel = allChannels.find(c => c.name.trim() === 'DAZN 1 DE');
+                const defaultChannel = allChannels.find(c => c.name.trim() === 'BeIN Sport 1 HD');
                 if (defaultChannel) {
                     channelUrl = defaultChannel.url;
                 }
