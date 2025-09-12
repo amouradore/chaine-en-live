@@ -38,6 +38,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- PLAYER & ADS LOGIC ---
     const player = videojs('player');
 
+    // Personnalisation du message d'erreur
+    player.on('error', function() {
+        const errorDisplay = player.getChild('errorDisplay');
+        if (errorDisplay) {
+            errorDisplay.getChild('content').el().innerHTML = 'Refresh the page';
+        }
+    });
+
     const initAds = () => {
         try {
             // IMPORTANT: Remplacez cette URL de test par votre propre URL de publicité VAST.
