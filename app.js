@@ -66,7 +66,8 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const playChannel = (url) => {
-        player.src({ src: url, type: 'application/x-mpegURL' });
+        const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
+        player.src({ src: proxyUrl, type: 'application/x-mpegURL' });
         player.play();
     };
 
