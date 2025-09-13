@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- INITIALIZATION ---
     const init = async () => {
         try {
-            const response = await fetch('chaine.m3u8');
+            const response = await fetch('chaine2.m3u');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
