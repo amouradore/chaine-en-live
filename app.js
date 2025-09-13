@@ -38,16 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- PLAYER & ADS LOGIC ---
     const player = videojs('player');
 
-    // Intercept HLS segments to proxy them
-    videojs.Hls.xhr.beforeRequest = function (options) {
-      // Required to prevent circular requests
-      if (options.uri.includes('/api/proxy')) {
-        return options;
-      }
-      options.uri = `/api/proxy?url=${encodeURIComponent(options.uri)}`;
-      return options;
-    };
-
     // Personnalisation du message d'erreur
     player.on('error', function() {
         const errorDisplay = player.getChild('errorDisplay');
@@ -76,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const playChannel = (url) => {
-        const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
-        player.src({ src: proxyUrl, type: 'application/x-mpegURL' });
+        player.src({ src: url, type: 'application/x-mpegURL' });
         player.play();
     };
 
