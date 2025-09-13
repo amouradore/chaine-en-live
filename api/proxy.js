@@ -1,4 +1,3 @@
-
 export default async function handler(req, res) {
   const { url } = req.query;
 
@@ -7,17 +6,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch(decodeURIComponent(url));
-    
+    const decodedUrl = decodeURIComponent(url);
+    const response = await fetch(decodedUrl);
+
     if (!response.ok) {
-        throw new Error(`Failed to fetch: ${response.status} ${response.statusText}`);
+      throw new Error(`Failed to fetch: ${response.status} ${response.statusText} for URL: ${decodedUrl}`);
     }
 
-    const data = await response.text();
+    const contentType = response.headers.get('content-type');
+    const buffer = await response.arrayBuffer();
 
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Content-Type', 'application/vnd.apple.mpegurl');
-    res.status(200).send(data);
+    if (contentType) {
+      res.setHeader('Content-Type', contentType);
+    }
+
+    res.status(200).send(Buffer.from(buffer));
+
   } catch (error) {
     res.status(500).json({ message: `Error fetching the URL: ${error.message}` });
   }
