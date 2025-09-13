@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const playChannel = (url) => {
-        const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+        const proxyUrl = `/api/proxy?url=${encodeURIComponent(url)}`;
         player.src({ src: proxyUrl, type: 'application/x-mpegURL' });
         player.play();
     };
